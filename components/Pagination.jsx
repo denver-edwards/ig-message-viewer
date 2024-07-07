@@ -32,7 +32,7 @@ export default function Pagination({
         <button
           key="first"
           onClick={() => handlePageChange(1)}
-          className="px-4 py-2 mx-1 rounded bg-gray-200"
+          className="px-4 py-2 mx-1 rounded bg-cyan-100 text-gray-700 hover:bg-cyan-400"
         >
           &laquo;
         </button>
@@ -53,8 +53,8 @@ export default function Pagination({
           onClick={() => handlePageChange(i)}
           className={`px-4 py-2 mx-1 rounded ${
             currentPage === i
-              ? "bg-blue-500 text-white hover:bg-blue-700"
-              : "bg-gray-200 hover:bg-gray-400"
+              ? "bg-cyan-500 text-white hover:bg-cyan-400"
+              : "bg-cyan-200 hover:bg-cyan-400 text-gray-700"
           }`}
         >
           {i}
@@ -68,7 +68,7 @@ export default function Pagination({
         <button
           key="last"
           onClick={() => handlePageChange(totalPages)}
-          className="px-4 py-2 mx-1 rounded bg-gray-200"
+          className="px-4 py-2 mx-1 rounded bg-cyan-100 text-gray-700 hover:bg-cyan-400"
         >
           &raquo;
         </button>
@@ -81,16 +81,25 @@ export default function Pagination({
   return (
     <>
       {totalPages > 1 && (
-        <div className="flex justify-center items-center mt-4">
-          {getPaginationButtons()}
-          <form onSubmit={handleInputPageSubmit} className="ml-4">
+        <div className="flex flex-col items-center mt-4">
+          <div className="flex items-center">{getPaginationButtons()}</div>
+          <form
+            onSubmit={handleInputPageSubmit}
+            className="mt-4 flex items-center"
+          >
             <input
               type="number"
               value={inputPage}
               onChange={handleInputChange}
               placeholder="Page"
-              className="px-4 py-2 rounded border border-gray-300"
+              className="px-4 py-2 rounded-l border border-gray-300 outline-none"
             />
+            <button
+              type="submit"
+              className="px-4 py-2 bg-cyan-500 text-white rounded-r border border-cyan-500 hover:bg-cyan-600"
+            >
+              Go
+            </button>
           </form>
         </div>
       )}

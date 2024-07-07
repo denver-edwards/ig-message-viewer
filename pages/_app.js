@@ -8,6 +8,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>Instagram Message Viewer</title>
+        <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
       </Head>
       <Component {...pageProps} />
       <ToastContainer position="top-center" />

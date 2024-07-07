@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Message from "@/components/Message";
 import Pagination from "@/components/Pagination";
+import FileInput from "@/components/FileInput";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
@@ -47,46 +49,51 @@ export default function Home() {
   const showError = (err) => toast.warning(err, { toastId: 1 });
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Instagram Message Viewer</h1>
-      <input
-        type="file"
-        accept=".json"
-        onChange={handleFileUpload}
-        className="mb-4"
-      />
+    <>
+      <main className="flex flex-col h-screen mx-auto py-4 px-16 lg:px-60 bg-slate-100 text-cyan-900">
+        <h1 className="text-2xl font-bold mb-4 text-center">
+          Instagram Message Viewer
+        </h1>
 
-      <button
-        className="py-1 px-2 text-sm text-white bg-yellow-400 rounded-lg"
-        onClick={() =>
-          currentUser !== participants[1].name
-            ? setCurrentUser(participants[1].name)
-            : setCurrentUser(participants[0].name)
-        }
-      >
-        Switch Sides
-      </button>
+        <div className="mb-4 text-center">
+          <FileInput handleFileUpload={handleFileUpload} />
 
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        {displayedMessages.map((message, index) => (
-          <Message
-            key={index}
-            sender_name={message.sender_name}
-            content={message.content}
-            timestamp_ms={message.timestamp_ms}
-            reactions={message.reactions}
-            currentUser={currentUser}
-          />
-        ))}
-      </div>
+          {messages.length > 1 ? (
+            <button
+              className="ml-10 py-1 px-2 text-sm text-white bg-cyan-500 hover:bg-cyan-600 rounded-lg"
+              onClick={() =>
+                currentUser !== participants[1].name
+                  ? setCurrentUser(participants[1].name)
+                  : setCurrentUser(participants[0].name)
+              }
+            >
+              Switch Sides
+            </button>
+          ) : null}
+        </div>
 
-      <Pagination
-        inputPage={inputPage}
-        totalPages={totalPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        setInputPage={setInputPage}
-      />
-    </div>
+        <div className="bg-white shadow-lg rounded-xl overflow-x-hidden">
+          {displayedMessages.map((message, index) => (
+            <Message
+              key={index}
+              sender_name={message.sender_name}
+              content={message.content}
+              timestamp_ms={message.timestamp_ms}
+              reactions={message.reactions}
+              currentUser={currentUser}
+            />
+          ))}
+        </div>
+
+        <Pagination
+          inputPage={inputPage}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          setInputPage={setInputPage}
+        />
+      </main>
+      <Footer />
+    </>
   );
 }
