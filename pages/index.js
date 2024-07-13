@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import Instructions from "@/components/Instructions";
 import Message from "@/components/Message";
 import Pagination from "@/components/Pagination";
 import FileInput from "@/components/FileInput";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -50,17 +52,17 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex flex-col h-screen mx-auto py-4 px-16 lg:px-60 bg-slate-100 text-cyan-900">
-        <h1 className="text-2xl font-bold mb-4 text-center">
-          Instagram Message Viewer
-        </h1>
+      <div className="flex flex-col min-h-screen bg-slate-100 pb-10 text-cyan-900">
+        <Header />
 
-        <div className="mb-4 text-center">
+        {messages.length < 1 ? <Instructions /> : null}
+
+        <div className="flex justify-center items-center my-4">
           <FileInput handleFileUpload={handleFileUpload} />
 
           {messages.length > 1 ? (
             <button
-              className="ml-10 py-1 px-2 text-sm text-white bg-cyan-500 hover:bg-cyan-600 rounded-lg"
+              className="ml-4 py-2 px-4 text-sm text-white bg-cyan-500 hover:bg-cyan-600 rounded-3xl"
               onClick={() =>
                 currentUser !== participants[1].name
                   ? setCurrentUser(participants[1].name)
@@ -72,7 +74,7 @@ export default function Home() {
           ) : null}
         </div>
 
-        <div className="bg-white shadow-lg rounded-xl overflow-x-hidden">
+        <div className="bg-white shadow-lg rounded-xl overflow-x-auto sm:overflow-x-hidden p-4 sm:p-6 mx-auto sm:w-4/5 w-full">
           {displayedMessages.map((message, index) => (
             <Message
               key={index}
@@ -92,7 +94,8 @@ export default function Home() {
           setCurrentPage={setCurrentPage}
           setInputPage={setInputPage}
         />
-      </main>
+      </div>
+
       <Footer />
     </>
   );

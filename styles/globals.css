@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: "DM Sans", sans-serif;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
   background-color: transparent;

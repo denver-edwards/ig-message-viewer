@@ -21,7 +21,7 @@ export default function FileInput({ handleFileUpload }) {
     <>
       <button
         onClick={handleButtonClick}
-        className="px-2 py-1 bg-cyan-700 hover:bg-cyan-600 text-sm text-white rounded-lg outline-none"
+        className="px-10 py-2 bg-cyan-700 hover:bg-cyan-900 text-sm text-white rounded-3xl outline-none"
       >
         <ArrowUpFromLine size={"1.1em"} className="inline mr-1" />
         {fileName}
