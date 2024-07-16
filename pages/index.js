@@ -74,18 +74,20 @@ export default function Home() {
           ) : null}
         </div>
 
-        <div className="bg-white shadow-lg rounded-xl overflow-x-auto sm:overflow-x-hidden p-4 sm:p-6 mx-auto sm:w-4/5 w-full">
-          {displayedMessages.map((message, index) => (
-            <Message
-              key={index}
-              sender_name={message.sender_name}
-              content={message.content}
-              timestamp_ms={message.timestamp_ms}
-              reactions={message.reactions}
-              currentUser={currentUser}
-            />
-          ))}
-        </div>
+        {messages.length > 1 ? (
+          <div className="bg-white shadow-lg rounded-xl overflow-x-auto sm:overflow-x-hidden p-4 sm:p-6 mx-auto sm:w-4/5 w-full">
+            {displayedMessages.map((message, index) => (
+              <Message
+                key={index}
+                sender_name={message.sender_name}
+                content={message.content}
+                timestamp_ms={message.timestamp_ms}
+                reactions={message.reactions}
+                currentUser={currentUser}
+              />
+            ))}
+          </div>
+        ) : null}
 
         <Pagination
           inputPage={inputPage}
